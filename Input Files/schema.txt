@@ -1,0 +1,535 @@
+---
+DROP TABLE IF EXISTS `association`;
+CREATE TABLE `association` (
+  `id` bigint(20) NOT NULL,
+  `gene_fk` int(11) NOT NULL,
+  `gene_set_fk` int(11) NOT NULL,
+  `imported_value` float DEFAULT NULL,
+  `cleaned_value` float DEFAULT NULL,
+  `standardized_value` float DEFAULT NULL,
+  `threshold_value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gene_attribute_idx` (`gene_fk`,`gene_set_fk`),
+  UNIQUE KEY `attribute_gene_idx` (`gene_set_fk`,`gene_fk`),
+  KEY `standardized_value_idx` (`standardized_value`),
+  KEY `threshold_value_idx` (`threshold_value`),
+  CONSTRAINT `association_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`),
+  CONSTRAINT `association_ibfk_2` FOREIGN KEY (`gene_set_fk`) REFERENCES `gene_set` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE `attribute` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `name_from_naming_authority` varchar(255) DEFAULT NULL,
+  `id_from_naming_authority` varchar(255) DEFAULT NULL,
+  `description_from_naming_authority` longtext DEFAULT NULL,
+  `url_from_naming_authority` longtext DEFAULT NULL,
+  `naming_authority_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `naming_authority_fk` (`naming_authority_fk`),
+  CONSTRAINT `attribute_ibfk_1` FOREIGN KEY (`naming_authority_fk`) REFERENCES `naming_authority` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `attribute_group`;
+CREATE TABLE `attribute_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `num_attributes` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `attribute_type`;
+CREATE TABLE `attribute_type` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `attribute_group_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  KEY `attribute_group_fk_idx` (`attribute_group_fk`),
+  CONSTRAINT `attribute_type_ibfk_1` FOREIGN KEY (`attribute_group_fk`) REFERENCES `attribute_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `dataset`;
+CREATE TABLE `dataset` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `name_without_resource` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `association` varchar(255) DEFAULT NULL,
+  `gene_set_description` varchar(255) DEFAULT NULL,
+  `gene_sets_description` varchar(255) DEFAULT NULL,
+  `attribute_set_description` varchar(255) DEFAULT NULL,
+  `positive_association` varchar(255) DEFAULT NULL,
+  `negative_association` varchar(255) DEFAULT NULL,
+  `is_signed` tinyint(1) DEFAULT NULL,
+  `is_continuous_valued` tinyint(1) DEFAULT 0,
+  `last_updated` date DEFAULT NULL,
+  `directory` varchar(255) DEFAULT NULL,
+  `num_page_views` int(11) DEFAULT NULL,
+  `resource_fk` int(11) DEFAULT NULL,
+  `measurement_fk` int(11) DEFAULT NULL,
+  `dataset_group_fk` int(11) DEFAULT NULL,
+  `attribute_type_fk` int(11) DEFAULT NULL,
+  `attribute_group_fk` int(11) DEFAULT NULL,
+  `evidence_type` varchar(255) DEFAULT NULL,
+  `evidence_group` varchar(255) DEFAULT NULL,
+  `measurement_bias` varchar(255) DEFAULT NULL,
+  `attribute_type_plural` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  KEY `resource_fk_idx` (`resource_fk`),
+  KEY `measurement_fk_idx` (`measurement_fk`),
+  KEY `dataset_group_fk_idx` (`dataset_group_fk`),
+  KEY `attribute_type_fk_idx` (`attribute_type_fk`),
+  KEY `attribute_group_fk_idx` (`attribute_group_fk`),
+  FULLTEXT KEY `name_idx_ft` (`name`),
+  FULLTEXT KEY `description_idx_ft` (`description`),
+  FULLTEXT KEY `association_idx_ft` (`association`),
+  CONSTRAINT `dataset_ibfk_1` FOREIGN KEY (`resource_fk`) REFERENCES `resource` (`id`),
+  CONSTRAINT `dataset_ibfk_2` FOREIGN KEY (`measurement_fk`) REFERENCES `measurement` (`id`),
+  CONSTRAINT `dataset_ibfk_3` FOREIGN KEY (`dataset_group_fk`) REFERENCES `dataset_group` (`id`),
+  CONSTRAINT `dataset_ibfk_4` FOREIGN KEY (`attribute_type_fk`) REFERENCES `attribute_type` (`id`),
+  CONSTRAINT `dataset_ibfk_5` FOREIGN KEY (`attribute_group_fk`) REFERENCES `attribute_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `dataset_group`;
+CREATE TABLE `dataset_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `num_datasets` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `dataset_pair_visualization`;
+CREATE TABLE `dataset_pair_visualization` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dataset_1_fk` int(11) NOT NULL,
+  `dataset_2_fk` int(11) NOT NULL,
+  `image` varchar(2048) DEFAULT NULL,
+  `clustergrammer_link` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dataset_1` (`dataset_1_fk`),
+  KEY `dataset_2` (`dataset_2_fk`)
+) ENGINE=InnoDB AUTO_INCREMENT=7309 DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `dataset_test`;
+CREATE TABLE `dataset_test` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `name_without_resource` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `association` varchar(255) DEFAULT NULL,
+  `gene_set_description` varchar(255) DEFAULT NULL,
+  `gene_sets_description` varchar(255) DEFAULT NULL,
+  `attribute_set_description` varchar(255) DEFAULT NULL,
+  `positive_association` varchar(255) DEFAULT NULL,
+  `negative_association` varchar(255) DEFAULT NULL,
+  `is_signed` tinyint(1) DEFAULT NULL,
+  `is_continuous_valued` tinyint(1) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  `directory` varchar(255) DEFAULT NULL,
+  `num_page_views` int(11) DEFAULT NULL,
+  `resource_fk` int(11) DEFAULT NULL,
+  `measurement_fk` int(11) DEFAULT NULL,
+  `dataset_group_fk` int(11) DEFAULT NULL,
+  `attribute_type_fk` int(11) DEFAULT NULL,
+  `attribute_group_fk` int(11) DEFAULT NULL,
+  `evidence_type` varchar(255) DEFAULT NULL,
+  `evidence_group` varchar(255) DEFAULT NULL,
+  `measurement_bias` varchar(255) DEFAULT NULL,
+  `attribute_type_plural` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  KEY `resource_fk_idx` (`resource_fk`),
+  KEY `measurement_fk_idx` (`measurement_fk`),
+  KEY `dataset_group_fk_idx` (`dataset_group_fk`),
+  KEY `attribute_type_fk_idx` (`attribute_type_fk`),
+  KEY `attribute_group_fk_idx` (`attribute_group_fk`),
+  FULLTEXT KEY `name_idx_ft` (`name`),
+  FULLTEXT KEY `description_idx_ft` (`description`),
+  FULLTEXT KEY `association_idx_ft` (`association`),
+  CONSTRAINT `dataset_test_ibfk_1` FOREIGN KEY (`resource_fk`) REFERENCES `resource` (`id`),
+  CONSTRAINT `dataset_test_ibfk_2` FOREIGN KEY (`measurement_fk`) REFERENCES `measurement` (`id`),
+  CONSTRAINT `dataset_test_ibfk_3` FOREIGN KEY (`dataset_group_fk`) REFERENCES `dataset_group` (`id`),
+  CONSTRAINT `dataset_test_ibfk_4` FOREIGN KEY (`attribute_type_fk`) REFERENCES `attribute_type` (`id`),
+  CONSTRAINT `dataset_test_ibfk_5` FOREIGN KEY (`attribute_group_fk`) REFERENCES `attribute_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `dataset_visualization`;
+CREATE TABLE `dataset_visualization` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `type` varchar(205) DEFAULT NULL,
+  `image` varchar(2048) DEFAULT NULL,
+  `clustergrammer_link` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dataset_fk` (`dataset_fk`)
+) ENGINE=InnoDB AUTO_INCREMENT=553 DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `datasets_to_publications`;
+CREATE TABLE `datasets_to_publications` (
+  `id` int(11) NOT NULL,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `publication_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dataset_publication_idx` (`dataset_fk`,`publication_fk`),
+  UNIQUE KEY `publication_dataset_idx` (`publication_fk`,`dataset_fk`),
+  CONSTRAINT `datasets_to_publications_ibfk_1` FOREIGN KEY (`dataset_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `datasets_to_publications_ibfk_2` FOREIGN KEY (`publication_fk`) REFERENCES `publication` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `devi_report`;
+CREATE TABLE `devi_report` (
+  `gene_symbol` varchar(255) DEFAULT NULL,
+  `dataset_name` varchar(255) DEFAULT NULL,
+  `gene_set_name` varchar(255) DEFAULT NULL,
+  `gene_set_description` longtext DEFAULT NULL,
+  `standardized_value` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `download`;
+CREATE TABLE `download` (
+  `id` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `download_type_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dataset_download_fk_idx` (`dataset_fk`,`download_type_fk`),
+  KEY `dataset_fk_idx` (`dataset_fk`),
+  KEY `download_type_fk_idx` (`download_type_fk`),
+  CONSTRAINT `download_ibfk_1` FOREIGN KEY (`dataset_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `download_ibfk_2` FOREIGN KEY (`download_type_fk`) REFERENCES `download_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `download_old`;
+CREATE TABLE `download_old` (
+  `id` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `download_type_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dataset_download_fk_idx` (`dataset_fk`,`download_type_fk`),
+  KEY `dataset_fk_idx` (`dataset_fk`),
+  KEY `download_type_fk_idx` (`download_type_fk`),
+  CONSTRAINT `download_old_ibfk_1` FOREIGN KEY (`dataset_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `download_old_ibfk_2` FOREIGN KEY (`download_type_fk`) REFERENCES `download_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `download_type`;
+CREATE TABLE `download_type` (
+  `id` int(11) NOT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `ordering` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `filename_idx` (`filename`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `gene`;
+CREATE TABLE `gene` (
+  `id` int(11) NOT NULL,
+  `symbol` varchar(255) DEFAULT NULL,
+  `ncbi_entrez_gene_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `ncbi_entrez_gene_url` longtext DEFAULT NULL,
+  `idg_family_fk` int(11) DEFAULT NULL,
+  `idg_tdl_class_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `symbol_idx` (`symbol`),
+  KEY `idg_family_fk_idx` (`idg_family_fk`),
+  KEY `idg_tdl_class_fk_idx` (`idg_tdl_class_fk`),
+  FULLTEXT KEY `name_idx_ft` (`name`),
+  FULLTEXT KEY `description_idx_ft` (`description`),
+  FULLTEXT KEY `symbol_idx_ft` (`symbol`),
+  CONSTRAINT `gene_ibfk_1` FOREIGN KEY (`idg_family_fk`) REFERENCES `idg_family` (`id`),
+  CONSTRAINT `gene_ibfk_2` FOREIGN KEY (`idg_tdl_class_fk`) REFERENCES `idg_tdl_class` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `gene_set`;
+CREATE TABLE `gene_set` (
+  `id` int(11) NOT NULL,
+  `name_from_dataset` varchar(255) DEFAULT NULL,
+  `id_from_dataset` varchar(255) DEFAULT NULL,
+  `description_from_dataset` longtext DEFAULT NULL,
+  `url_from_dataset` longtext DEFAULT NULL,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `attribute_type_fk` int(11) DEFAULT NULL,
+  `attribute_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dataset_name_idx` (`dataset_fk`,`name_from_dataset`),
+  UNIQUE KEY `name_dataset_idx` (`name_from_dataset`,`dataset_fk`),
+  KEY `dataset_fk_idx` (`dataset_fk`),
+  KEY `attribute_fk` (`attribute_fk`),
+  FULLTEXT KEY `name_idx_ft` (`name_from_dataset`),
+  FULLTEXT KEY `description_idx_ft` (`description_from_dataset`),
+  CONSTRAINT `gene_set_ibfk_1` FOREIGN KEY (`dataset_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `gene_set_ibfk_2` FOREIGN KEY (`attribute_fk`) REFERENCES `attribute` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `gene_synonym`;
+CREATE TABLE `gene_synonym` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `symbol` varchar(255) DEFAULT NULL,
+  `gene_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `symbol_idx` (`symbol`),
+  KEY `gene_fk_idx` (`gene_fk`),
+  FULLTEXT KEY `symbol_idx_ft` (`symbol`),
+  CONSTRAINT `gene_synonym_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=85489 DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `gl_prediction`;
+CREATE TABLE `gl_prediction` (
+  `id` int(11) NOT NULL,
+  `gpcr_has_known_ligand` int(11) DEFAULT NULL,
+  `ligand_has_known_gpcr` int(11) DEFAULT NULL,
+  `in_training_set` int(11) DEFAULT NULL,
+  `known_interaction` int(11) DEFAULT NULL,
+  `predicted_interaction_above_50pct_probability` int(11) DEFAULT NULL,
+  `probability` decimal(3,2) DEFAULT NULL,
+  `false_positive_rate` decimal(3,2) DEFAULT NULL,
+  `true_positive_rate` decimal(3,2) DEFAULT NULL,
+  `misclassification_rate` decimal(3,2) DEFAULT NULL,
+  `false_discovery_rate` decimal(3,2) DEFAULT NULL,
+  `f1_score` decimal(3,2) DEFAULT NULL,
+  `matthews_correlation_coefficient` decimal(3,2) DEFAULT NULL,
+  `gpcr_gene_fk` int(11) DEFAULT NULL,
+  `ligand_gene_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gpcr_ligand_idx` (`gpcr_gene_fk`,`ligand_gene_fk`),
+  KEY `gpcr_gene_fk_idx` (`gpcr_gene_fk`),
+  KEY `ligand_gene_fk_idx` (`ligand_gene_fk`),
+  CONSTRAINT `gl_prediction_ibfk_1` FOREIGN KEY (`gpcr_gene_fk`) REFERENCES `gene` (`id`),
+  CONSTRAINT `gl_prediction_ibfk_2` FOREIGN KEY (`ligand_gene_fk`) REFERENCES `gene` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `hgnc_root_families_to_genes`;
+CREATE TABLE `hgnc_root_families_to_genes` (
+  `id` int(11) NOT NULL,
+  `gene_fk` int(11) DEFAULT NULL,
+  `hgnc_root_family_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gene_family_idx` (`gene_fk`,`hgnc_root_family_fk`),
+  UNIQUE KEY `family_gene_idx` (`hgnc_root_family_fk`,`gene_fk`),
+  CONSTRAINT `hgnc_root_families_to_genes_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`),
+  CONSTRAINT `hgnc_root_families_to_genes_ibfk_2` FOREIGN KEY (`hgnc_root_family_fk`) REFERENCES `hgnc_root_family` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `hgnc_root_family`;
+CREATE TABLE `hgnc_root_family` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `family_id` int(11) DEFAULT NULL,
+  `url` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  FULLTEXT KEY `name_idx_ft` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `ic_prediction`;
+CREATE TABLE `ic_prediction` (
+  `id` int(11) NOT NULL,
+  `in_training_set` int(11) DEFAULT NULL,
+  `known_ion_channel` int(11) DEFAULT NULL,
+  `predicted_ion_channel_above_50pct_probability` int(11) DEFAULT NULL,
+  `probability` decimal(3,2) DEFAULT NULL,
+  `false_positive_rate` decimal(3,2) DEFAULT NULL,
+  `true_positive_rate` decimal(3,2) DEFAULT NULL,
+  `misclassification_rate` decimal(3,2) DEFAULT NULL,
+  `false_discovery_rate` decimal(3,2) DEFAULT NULL,
+  `f1_score` decimal(3,2) DEFAULT NULL,
+  `matthews_correlation_coefficient` decimal(3,2) DEFAULT NULL,
+  `similar_ion_channel_1` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_2` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_3` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_4` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_5` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_6` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_7` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_8` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_9` varchar(255) DEFAULT NULL,
+  `similar_ion_channel_10` varchar(255) DEFAULT NULL,
+  `gene_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gene_fk_idx` (`gene_fk`),
+  CONSTRAINT `ic_prediction_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `idg_family`;
+CREATE TABLE `idg_family` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `idg_tdl_class`;
+CREATE TABLE `idg_tdl_class` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `ks_prediction`;
+CREATE TABLE `ks_prediction` (
+  `id` int(11) NOT NULL,
+  `kinase_has_known_substrate` int(11) DEFAULT NULL,
+  `substrate_has_known_kinase` int(11) DEFAULT NULL,
+  `in_training_set` int(11) DEFAULT NULL,
+  `known_interaction` int(11) DEFAULT NULL,
+  `predicted_interaction_above_50pct_probability` int(11) DEFAULT NULL,
+  `probability` decimal(3,2) DEFAULT NULL,
+  `false_positive_rate` decimal(3,2) DEFAULT NULL,
+  `true_positive_rate` decimal(3,2) DEFAULT NULL,
+  `misclassification_rate` decimal(3,2) DEFAULT NULL,
+  `false_discovery_rate` decimal(3,2) DEFAULT NULL,
+  `f1_score` decimal(3,2) DEFAULT NULL,
+  `matthews_correlation_coefficient` decimal(3,2) DEFAULT NULL,
+  `kinase_gene_fk` int(11) DEFAULT NULL,
+  `substrate_gene_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kinase_substrate_idx` (`kinase_gene_fk`,`substrate_gene_fk`),
+  KEY `kinase_gene_fk_idx` (`kinase_gene_fk`),
+  KEY `substrate_gene_fk_idx` (`substrate_gene_fk`),
+  CONSTRAINT `ks_prediction_ibfk_1` FOREIGN KEY (`kinase_gene_fk`) REFERENCES `gene` (`id`),
+  CONSTRAINT `ks_prediction_ibfk_2` FOREIGN KEY (`substrate_gene_fk`) REFERENCES `gene` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `measurement`;
+CREATE TABLE `measurement` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `mp_prediction`;
+CREATE TABLE `mp_prediction` (
+  `id` int(11) NOT NULL,
+  `in_training_set` int(11) DEFAULT NULL,
+  `known_association` int(11) DEFAULT NULL,
+  `predicted_association_above_50pct_probability` int(11) DEFAULT NULL,
+  `probability` decimal(3,2) DEFAULT NULL,
+  `false_positive_rate` decimal(3,2) DEFAULT NULL,
+  `true_positive_rate` decimal(3,2) DEFAULT NULL,
+  `misclassification_rate` decimal(3,2) DEFAULT NULL,
+  `false_discovery_rate` decimal(3,2) DEFAULT NULL,
+  `f1_score` decimal(3,2) DEFAULT NULL,
+  `matthews_correlation_coefficient` decimal(3,2) DEFAULT NULL,
+  `gene_fk` int(11) DEFAULT NULL,
+  `gene_set_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `gene_geneset_idx` (`gene_fk`,`gene_set_fk`),
+  KEY `gene_fk_idx` (`gene_fk`),
+  KEY `gene_set_fk_idx` (`gene_set_fk`),
+  CONSTRAINT `mp_prediction_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`),
+  CONSTRAINT `mp_prediction_ibfk_2` FOREIGN KEY (`gene_set_fk`) REFERENCES `gene_set` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `naming_authority`;
+CREATE TABLE `naming_authority` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `acronym` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `url` longtext DEFAULT NULL,
+  `publication_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  KEY `publication_fk_idx` (`publication_fk`),
+  CONSTRAINT `naming_authority_ibfk_1` FOREIGN KEY (`publication_fk`) REFERENCES `publication` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `protein`;
+CREATE TABLE `protein` (
+  `id` int(11) NOT NULL,
+  `symbol` varchar(255) DEFAULT NULL,
+  `uniprot_id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `uniprot_url` longtext DEFAULT NULL,
+  `gene_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `symbol_idx` (`symbol`),
+  KEY `gene_fk_idx` (`gene_fk`),
+  FULLTEXT KEY `symbol_idx_ft` (`symbol`),
+  FULLTEXT KEY `name_idx_ft` (`name`),
+  FULLTEXT KEY `description_idx_ft` (`description`),
+  CONSTRAINT `protein_ibfk_1` FOREIGN KEY (`gene_fk`) REFERENCES `gene` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `publication`;
+CREATE TABLE `publication` (
+  `id` int(11) NOT NULL,
+  `long_citation` longtext DEFAULT NULL,
+  `short_citation` varchar(255) DEFAULT NULL,
+  `url` longtext DEFAULT NULL,
+  `pmid` int(11) DEFAULT NULL,
+  `pubmed_url` longtext DEFAULT NULL,
+  `first_author_last_name` varchar(255) DEFAULT NULL,
+  `first_author_initials` varchar(255) DEFAULT NULL,
+  `journal_abbreviation` varchar(255) DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
+  `title` longtext DEFAULT NULL,
+  `volume` varchar(255) DEFAULT NULL,
+  `pages` varchar(255) DEFAULT NULL,
+  `last_author_initials` varchar(255) DEFAULT NULL,
+  `dataset_fk` int(11) DEFAULT NULL,
+  `naming_authority_fk` int(11) DEFAULT NULL,
+  `resource_fk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pmid_idx` (`pmid`),
+  KEY `FKBFBBA22C54A4854E` (`resource_fk`),
+  KEY `FKBFBBA22C2D018B24` (`resource_fk`),
+  KEY `FKBFBBA22C6551CA7A` (`dataset_fk`),
+  KEY `FKBFBBA22CBE0CDB49` (`naming_authority_fk`),
+  CONSTRAINT `FKBFBBA22C2D018B24` FOREIGN KEY (`resource_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `FKBFBBA22C54A4854E` FOREIGN KEY (`resource_fk`) REFERENCES `resource` (`id`),
+  CONSTRAINT `FKBFBBA22C6551CA7A` FOREIGN KEY (`dataset_fk`) REFERENCES `dataset` (`id`),
+  CONSTRAINT `FKBFBBA22CBE0CDB49` FOREIGN KEY (`naming_authority_fk`) REFERENCES `naming_authority` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `resource`;
+CREATE TABLE `resource` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `acronym` varchar(255) DEFAULT NULL,
+  `long_description` longtext DEFAULT NULL,
+  `short_description` longtext DEFAULT NULL,
+  `url` longtext DEFAULT NULL,
+  `num_attributes` bigint(20) DEFAULT NULL,
+  `num_datasets` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_idx` (`name`),
+  FULLTEXT KEY `name_idx_ft` (`name`),
+  FULLTEXT KEY `acronym_idx_ft` (`acronym`),
+  FULLTEXT KEY `long_description_idx_ft` (`long_description`),
+  FULLTEXT KEY `short_description_idx_ft` (`short_description`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `stats`;
+CREATE TABLE `stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `num_attributes` bigint(20) DEFAULT NULL,
+  `num_datasets` bigint(20) DEFAULT NULL,
+  `num_features` bigint(20) DEFAULT NULL,
+  `num_genes` bigint(20) DEFAULT NULL,
+  `num_resources` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+---
+DROP TABLE IF EXISTS `user_search`;
+CREATE TABLE `user_search` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keywords` text NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=482452 DEFAULT CHARSET=utf8;
+---
