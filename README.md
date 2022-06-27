@@ -1,6 +1,8 @@
 Harmonizome 3.0
 =================================================
 
+![cover](Image/harmonizome.png)
+
 ## Motivation
 Harmonizome was last updated from 2014-2016, however there are many users accessing Harmonizome daily. The UI/UX of Harmonizome is good, but the content and resources need to be updated. Previous attempts have been made to update Harmonizome, but due to time constraints it was dropped. During previous attempts, there was an initial attempt to determine which resources were updated and which were not. 
 
@@ -14,7 +16,12 @@ Table of Contents
 * [References](#references)
 
 ## Usage
-
+- Clone the repository
+```bash
+git clone 'https://github.com/beagan-svg/ETL-Repository'
+```
+- Run Jupyter Notebook ETL
+- Inputs: Appyter ETL Process Files, harmonizome.sql, schema.txt (Located in Input Directory)
 ------------------------------------------------------------------
 
 
@@ -28,8 +35,6 @@ Thus, this led to development of Harmonizome developed by the Ma’ayan Lab. Har
 There are many ways to utilize Harmonizome for biomedical research and there have been thousands of users that visit the site since it was developed in 2015. However, Harmonizome needs to be updated to keep up with growing demand for knowledge from users and integrate updated datasets from its resources. 
 
 ------------------------------------------------------------------
-
-![cover](Image/harmonizome.png)
 
 ## Authors and History
 
