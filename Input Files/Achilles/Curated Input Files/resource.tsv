@@ -1,0 +1,114 @@
+		Resource Identifier (ID)	Name	Acronym 	Long Description	Short Description	URL	Num Attributes	Num Datasets	Image
+Resource Name	Dataset Name	Unique Num (Ex. 12)	Name of Resource (Ex. Comparative Toxicogenomics Database)	Short Name or Abbrev (CTD)	Detail information about the dataset	Summary of the dataset	URL of where dataset can be found (Ex. http://ctdbase.org/)	Number of Attributes	Number of Datasets	<dataset>.png
+Achilles	Achilles Cell Line Gene Essentiality Profiles	1	Achilles	Null	The Cancer Target Discovery and Development Network is a cancer phenotyping project that seeks to identify novel cancer drug targets and novel biomarkers for diagnosis of cancer and prediction of drug response.  Libraries of small molecules, cDNA over-expression vectors, and siRNA knockdown vectors are used to perturb molecular signaling pathways in cancer cell lines, and cell fitness is assayed by measuring the rate of cell proliferation.  Achilles is a CTD2 project that performed shRNA-mediated gene knockdown followed by proliferation rate quantification to assess the essentiality of genes for cell proliferation in a panel of cell lines.	Project screening essentiality of genes in cancer cell lines by measuring proliferation rates following gene knockdowns	https://portals.broadinstitute.org/achilles	216	1	achiles.png
+Allen Brain Atlas	Allen Brain Atlas Adult Human Brain Tissue Gene Expression Profiles	2								
+Allen Brain Atlas	Allen Brain Atlas Adult Mouse Brain Tissue Gene Expression Profiles	3								
+Allen Brain Atlas	Allen Brain Atlas Developing Human Brain Tissue Gene Expression Profiles by Microarray	4								
+Allen Brain Atlas	Allen Brain Atlas Developing Human Brain Tissue Gene Expression Profiles by RNA-seq	5								
+Allen Brain Atlas	Allen Brain Atlas Prenatal Human Brain Tissue Gene Expression Profiles	6								
+Biocarta	Biocarta Pathways	7								
+BioGPS	BioGPS Cell Line Gene Expression Profiles	8								
+BioGPS	BioGPS Human Cell Type and Tissue Gene Expression Profiles	9								
+BioGPS	BioGPS Mouse Cell Type and Tissue Gene Expression Profiles	10								
+Cancer Cell Line Encyclopedia	CCLE Cell Line Gene CNV Profiles	11								
+Cancer Cell Line Encyclopedia	CCLE Cell Line Gene Expression Profiles	12								
+Cancer Cell Line Encyclopedia	CCLE Cell Line Gene Mutation Profiles	13								
+ChIP-X Enrichment Analysis	CHEA Transcription Factor Binding Site Profiles	14								
+ChIP-X Enrichment Analysis	CHEA Transcription Factor Targets	15								
+ClinVar	ClinVar Gene-Phenotype Associations	16								
+Connectivity Map	CMAP Signatures of Differentially Expressed Genes for Small Molecules	17								
+COMPARTMENTS	COMPARTMENTS Curated Protein Localization Evidence Scores	18								
+COMPARTMENTS	COMPARTMENTS Experimental Protein Localization Evidence Scores	19								
+COMPARTMENTS	COMPARTMENTS Text-mining Protein Localization Evidence Scores	20								
+CORUM	CORUM Protein Complexes	21								
+Catalogue of Somatic Mutations In Cancer	COSMIC Cell Line Gene CNV Profiles	22								
+Catalogue of Somatic Mutations In Cancer	COSMIC Cell Line Gene Mutation Profiles	23								
+Comparative Toxicogenomics Database	CTD Gene-Chemical Interactions	24								
+Comparative Toxicogenomics Database	CTD Gene-Disease Associations	25								
+Database of Genotypes and Phenotypes	dbGAP Gene-Trait Associations	26								
+Dephosphorylation Database	DEPOD Substrates of Phosphatases	27								
+DISEASES	DISEASES Curated Gene-Disease Assocation Evidence Scores	28								
+DISEASES	DISEASES Experimental Gene-Disease Assocation Evidence Scores	29								
+DISEASES	DISEASES Text-mining Gene-Disease Assocation Evidence Scores	30								
+DrugBank	DrugBank Drug Targets	31								
+Encyclopedia of DNA Elements	ENCODE Histone Modification Site Profiles	32								
+Encyclopedia of DNA Elements	ENCODE Transcription Factor Binding Site Profiles	33								
+Encyclopedia of DNA Elements	ENCODE Transcription Factor Targets	34								
+ESCAPE	ESCAPE Omics Signatures of Genes and Proteins for Stem Cells	35								
+Genetic Association Database	GAD Gene-Disease Associations	36								
+Genetic Association Database	GAD High Level Gene-Disease Associations	37								
+Genomics of Drug Sensitivity in Cancer	GDSC Cell Line Gene Expression Profiles	38								
+Gene Reference Into Function	GeneRIF Biological Term Annotations	39								
+GeneSigDB	GeneSigDB Published Gene Signatures	40								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Diseases	41								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Gene Perturbations	42								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Kinase Perturbations	43								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Small Molecules	44								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Transcription Factor Perturbations	45								
+Gene Expression Omnibus	GEO Signatures of Differentially Expressed Genes for Viral Infections	46								
+Gene Ontology	GO Biological Process Annotations	47								
+Gene Ontology	GO Cellular Component Annotations	48								
+Gene Ontology	GO Molecular Function Annotations	49								
+Genotype Tissue Expression	GTEx eQTL	50								
+Genotype Tissue Expression	GTEx Tissue Gene Expression Profiles	51								
+Genotype Tissue Expression	GTEx Tissue Sample Gene Expression Profiles	52								
+Guide to Pharmacology	Guide to Pharmacology Chemical Ligands of Receptors	53								
+Guide to Pharmacology	Guide to Pharmacology Protein Ligands of Receptors	54								
+GWAS Catalog	GWAS Catalog SNP-Phenotype Associations	55								
+GWASdb	GWASdb SNP-Disease Associations	56								
+GWASdb	GWASdb SNP-Phenotype Associations	57								
+Heiser et al._ PNAS_ 2011	Heiser et al._ PNAS_ 2011 Cell Line Gene Expression Profiles	58								
+Human Metabolome Database	HMDB Metabolites of Enzymes	59								
+Human Protein Atlas	HPA Cell Line Gene Expression Profiles	60								
+Human Protein Atlas	HPA Tissue Gene Expression Profiles	61								
+Human Protein Atlas	HPA Tissue Protein Expression Profiles	62								
+Human Protein Atlas	HPA Tissue Sample Gene Expression Profiles	63								
+Human Proteome Map	HPM Cell Type and Tissue Protein Expression Profiles	64								
+Human Phenotype Ontology	HPO Gene-Disease Associations	65								
+Hub Proteins	Hub Proteins Protein-Protein Interactions	66								
+HuGE Navigator	HuGE Navigator Gene-Phenotype Associations	67								
+HumanCyc	HumanCyc Pathways	68								
+InterPro	InterPro Predicted Protein Domain Annotations	69								
+Jaspar PWMs	JASPAR Predicted Transcription Factor Targets	70								
+Kinase Enrichment Analysis	KEA Substrates of Kinases	71								
+Kyoto Encyclopedia of Genes and Genomes	KEGG Pathways	72								
+LINCS Kinativ	LINCS Kinativ Kinase Inhibitor Bioactivity Profiles	73								
+LINCS KinomeScan	LINCS KinomeScan Kinase Inhibitor Targets	74								
+Klijn et al._ Nat. Biotechnol._ 2015	Klijn et al._ Nat. Biotechnol._ 2015 Cell Line Gene CNV Profiles	75								
+Klijn et al._ Nat. Biotechnol._ 2015	Klijn et al._ Nat. Biotechnol._ 2015 Cell Line Gene Expression Profiles	76								
+Klijn et al._ Nat. Biotechnol._ 2015	Klijn et al._ Nat. Biotechnol._ 2015 Cell Line Gene Mutation Profiles	77								
+LINCS L1000 Connectivity Map	LINCS L1000 CMAP Signatures of Differentially Expressed Genes for Small Molecules	78								
+LOCATE	LOCATE Curated Protein Localization Annotations	79								
+MiRTarBase	MiRTarBase microRNA Targets	80								
+MotifMap	MotifMap Predicted Transcription Factor Targets	81								
+Mammalian Phenotype Ontology	MPO Gene-Phenotype Associations	82								
+Molecular Signatures Database	MSigDB Cancer Gene Co-expression Modules	83								
+Molecular Signatures Database	MSigDB Signatures of Differentially Expressed Genes for Cancer Gene Perturbations	84								
+Nuclear Receptor Signaling Atlas	NURSA Protein Complexes	85								
+Nuclear Receptor Signaling Atlas	NURSA Protein-Protein Interactions	86								
+Online Mendelian Inheritance in Man	OMIM Gene-Disease Associations	87								
+PANTHER	PANTHER Pathways	88								
+Pathway Commons	Pathway Commons Protein-Protein Interactions	89								
+Phosphosite Textmining	Phosphosite Textmining Biological Term Annotations	90								
+PhosphoSitePlus	PhosphoSitePlus Substrates of Kinases	91								
+Pathway Interaction Database	PID Pathways	92								
+Proteomics Database	ProteomicsDB Cell Type and Tissue Protein Expression Profiles	93								
+Reactome	Reactome Pathways	94								
+Roadmap Epigenomics	Roadmap Epigenomics Cell and Tissue DNA Accessibility Profiles	95								
+Roadmap Epigenomics	Roadmap Epigenomics Cell and Tissue DNA Methylation Profiles	96								
+Roadmap Epigenomics	Roadmap Epigenomics Cell and Tissue Gene Expression Profiles	97								
+Roadmap Epigenomics	Roadmap Epigenomics Histone Modification Site Profiles	98								
+SILAC Phosphoproteomics	SILAC Phosphoproteomics Signatures of Differentially Phosphorylated Proteins for Drugs	99								
+SILAC Phosphoproteomics	SILAC Phosphoproteomics Signatures of Differentially Phosphorylated Proteins for Gene Perturbations	100								
+SILAC Phosphoproteomics	SILAC Phosphoproteomics Signatures of Differentially Phosphorylated Proteins for Protein Ligands	101								
+TargetScan	TargetScan Predicted Conserved microRNA Targets	102								
+The Cancer Genome Atlas	TCGA Signatures of Differentially Expressed Genes for Tumors	103								
+TISSUES	TISSUES Curated Tissue Protein Expression Evidence Scores	104								
+TISSUES	TISSUES Experimental Tissue Protein Expression Evidence Scores	105								
+TISSUES	TISSUES Text-mining Tissue Protein Expression Evidence Scores	106								
+Virus MINT	Virus MINT Protein-Viral Protein Interactions	107								
+Wikipathways	Wikipathways Pathways	108								
+Virus MINT	Virus MINT Protein-Virus Interactions	109								
+LOCATE	LOCATE Predicted Protein Localization Annotations	110								
+TargetScan	TargetScan Predicted Nonconserved microRNA Targets	111								
+PhosphoSitePlus	PhosphoSitePlus Phosphosite-Disease Associations	112								
