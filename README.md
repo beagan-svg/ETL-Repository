@@ -40,8 +40,9 @@ There are many ways to utilize Harmonizome for biomedical research and there hav
 ## Links to sheets and files
 Link of sheets to keep track which resources were reprocess and loaded into Harmonizome: https://docs.google.com/spreadsheets/d/1G9QpbyaI3zqq5MILolD3mMXuuZAZ5V2BDYHgq1EEHs8/edit?usp=sharing
 
-Link to heatmap images:
+Link to heatmap similarity images:
 https://drive.google.com/drive/folders/1-S6078acImlgg5_f2YHiPRBhApsvSbh4?usp=sharing
+
 ------------------------------------------------------------------
 
 ## Authors and History
