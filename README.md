@@ -11,7 +11,7 @@ Table of Contents
 -----------------
 * [Usage](#usage)
 * [About-Harmonizome](#About-Harmonizome)
-* [Links to sheets and files](#Links to sheets and files)
+* [Links to sheets and files](#Links-to-sheets-and-files)
 * [Authors and history](#authors-and-history)
 * [Acknowledgments](#acknowledgments)
 * [References](#references)
@@ -37,7 +37,7 @@ There are many ways to utilize Harmonizome for biomedical research and there hav
 
 ------------------------------------------------------------------
 
-## Links to sheets and files
+## Links-to-sheets-and-files
 Link of sheets to keep track which resources were reprocess and loaded into Harmonizome: https://docs.google.com/spreadsheets/d/1G9QpbyaI3zqq5MILolD3mMXuuZAZ5V2BDYHgq1EEHs8/edit?usp=sharing
 
 Link to heatmap similarity images:
