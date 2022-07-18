@@ -11,6 +11,7 @@ Table of Contents
 -----------------
 * [Usage](#usage)
 * [About-Harmonizome](#About-Harmonizome)
+* [Links to sheets and files](#Links to sheets and files)
 * [Authors and history](#authors-and-history)
 * [Acknowledgments](#acknowledgments)
 * [References](#references)
@@ -34,6 +35,13 @@ Thus, this led to development of Harmonizome developed by the Ma’ayan Lab. Har
 
 There are many ways to utilize Harmonizome for biomedical research and there have been thousands of users that visit the site since it was developed in 2015. However, Harmonizome needs to be updated to keep up with growing demand for knowledge from users and integrate updated datasets from its resources. 
 
+------------------------------------------------------------------
+
+## Links to sheets and files
+Link of sheets to keep track which resources were reprocess and loaded into Harmonizome: https://docs.google.com/spreadsheets/d/1G9QpbyaI3zqq5MILolD3mMXuuZAZ5V2BDYHgq1EEHs8/edit?usp=sharing
+
+Link to heatmap images:
+https://drive.google.com/drive/folders/1-S6078acImlgg5_f2YHiPRBhApsvSbh4?usp=sharing
 ------------------------------------------------------------------
 
 ## Authors and History
